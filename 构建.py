@@ -119,8 +119,8 @@ def main():
     print("=" * 50)
     
     # 检查当前目录是否有脚本文件
-    if not Path('虎啸.pyw').exists():
-        print("错误: 请在包含'虎啸.pyw'的目录中运行此脚本")
+    if not Path('虎啸.py').exists():
+        print("错误: 请在包含'虎啸.py'的目录中运行此脚本")
         input("按回车键退出...")
         return
     
