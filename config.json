@@ -1,7 +1,4 @@
 {
-  "hotkeys": [
-    "<ctrl>"
-  ],
-  "hotkey": "/",
-  "hotkey_display": "/"
+  "hotkey": "<ctrl>",
+  "hotkey_display": "Ctrl"
 }

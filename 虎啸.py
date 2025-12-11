@@ -11,7 +11,7 @@ from tkinter import simpledialog
 
 # ========== 配置管理 ==========
 CONFIG_FILE = "config.json"
-DEFAULT_HOTKEY = "<ctrl>+<alt>+z"
+DEFAULT_HOTKEY = "<ctrl>+<alt>"
 
 def load_config():
     """加载配置文件"""
@@ -21,8 +21,8 @@ def load_config():
             with open(config_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except:
-            return {"hotkey": DEFAULT_HOTKEY, "hotkey_display": "Ctrl+Alt+Z"}
-    return {"hotkey": DEFAULT_HOTKEY, "hotkey_display": "Ctrl+Alt+Z"}
+            return {"hotkey": DEFAULT_HOTKEY, "hotkey_display": DEFAULT_HOTKEY}
+    return {"hotkey": DEFAULT_HOTKEY, "hotkey_display": DEFAULT_HOTKEY}
 
 def save_config(config):
     """保存配置文件"""
@@ -71,7 +71,7 @@ os.chdir(base_dir)
 # 加载配置
 config = load_config()
 current_hotkey = config.get("hotkey", DEFAULT_HOTKEY)
-current_hotkey_display = config.get("hotkey_display", "Ctrl+Alt+Z")
+current_hotkey_display = config.get("hotkey_display", DEFAULT_HOTKEY)
 
 # 初始化pygame mixer
 mixer.init(frequency=44100, size=-16, channels=2, buffer=4096)
@@ -179,19 +179,19 @@ def setup_global_hotkey(hotkey_str=None):
             
             # 恢复默认设置
             current_hotkey = DEFAULT_HOTKEY
-            current_hotkey_display = "Ctrl+Alt+Z"
+            current_hotkey_display = DEFAULT_HOTKEY
             config["hotkey"] = DEFAULT_HOTKEY
-            config["hotkey_display"] = "Ctrl+Alt+Z"
+            config["hotkey_display"] = DEFAULT_HOTKEY
             save_config(config)
             
-            hotkey_label.config(text=f"全局快捷键: Ctrl+Alt+Z")
-            status_label.config(text="就绪 - 点击按钮或按Ctrl+Alt+Z播放")
+            hotkey_label.config(text=f"全局快捷键: {DEFAULT_HOTKEY}")
+            status_label.config(text="就绪 - 点击按钮或按{DEFAULT_HOTKEY}播放")
             
             print(f"已恢复默认快捷键: {DEFAULT_HOTKEY}")
             return listener
         except Exception as e2:
             print(f"默认快捷键也设置失败: {e2}")
-            messagebox.showerror("错误", f"快捷键设置失败！\n错误: {e}\n请使用默认快捷键Ctrl+Alt+Z")
+            messagebox.showerror("错误", f"快捷键设置失败！\n错误: {e}\n请使用默认快捷键{DEFAULT_HOTKEY}")
             return None
 
 # ========== 设置界面 ==========
@@ -420,16 +420,16 @@ def open_settings():
         """重置为默认快捷键"""
         global current_hotkey, current_hotkey_display
         current_hotkey = DEFAULT_HOTKEY
-        current_hotkey_display = "Ctrl+Alt+Z"
+        current_hotkey_display = DEFAULT_HOTKEY
         
         config["hotkey"] = DEFAULT_HOTKEY
-        config["hotkey_display"] = "Ctrl+Alt+Z"
+        config["hotkey_display"] = DEFAULT_HOTKEY
         
         if save_config(config):
             setup_global_hotkey(DEFAULT_HOTKEY)
-            current_hotkey_label.config(text="Ctrl+Alt+Z")
+            current_hotkey_label.config(text=DEFAULT_HOTKEY)
             key_display.config(text="请按下一个组合键...")
-            messagebox.showinfo("成功", "已重置为默认快捷键: Ctrl+Alt+Z")
+            messagebox.showinfo("成功", f"已重置为默认快捷键：{DEFAULT_HOTKEY}")
         else:
             messagebox.showerror("错误", "保存配置失败！")
     

@@ -68,13 +68,13 @@ def build_exe():
         '--windowed',          # 无控制台窗口
         '--name=随机音频播放器', # EXE名称
         icon_arg,              # 图标参数（修改这里）
-        '--add-data=虎啸.pyw;.', # 包含脚本
+        '--add-data=虎啸.py;.', # 包含脚本
         '--hidden-import=pygame',
         '--hidden-import=pygame.mixer',
         '--hidden-import=pynput',
         '--hidden-import=pynput.keyboard',
         '--hidden-import=tkinter',
-        '虎啸.pyw'
+        '虎啸.py'
     ]
     
     
